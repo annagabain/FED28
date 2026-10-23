@@ -38,3 +38,6 @@
 - Events / user interactions
     - [Introduction to events](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Events)
     - [Event reference (overview)](https://developer.mozilla.org/en-US/docs/Web/Events)
+    - [Event Listeners](https://blog.webdevsimplified.com/2022-01/event-listeners/)
+- this
+  - [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
