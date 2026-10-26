@@ -41,3 +41,6 @@
     - [Event Listeners](https://blog.webdevsimplified.com/2022-01/event-listeners/)
 - this
   - [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+- Storage
+  - [sessionStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage)
+  - [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
