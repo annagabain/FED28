@@ -1,0 +1,109 @@
+/*
+box-sizing: border-box makes width include padding and borders.
+Without it, adding padding could make our calculator wider than expected.
+*/
+* {
+    box-sizing: border-box;
+}
+body {
+    /* Remove the browser's default margin around the page. */
+    margin: 0;
+    /* Make the page at least as tall as the browser window. */
+    min-height: 100vh;
+    /* Use CSS Grid to center the calculator horizontally and vertically. */
+    display: grid;
+    place-items: center;
+    background: #0f172a;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+.calculator {
+    /* Take 92% of the available screen width, but never exceed 360px. */
+    width: min(92vw, 360px);
+    /* Space between the edge of the calculator and its contents. */
+    padding: 22px;
+    border-radius: 24px;
+    background: #1e293b;
+    /* A soft shadow helps the calculator stand out from the page. */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+.screen {
+    min-height: 115px;
+    margin-bottom: 18px;
+    padding: 15px;
+    border-radius: 15px;
+    background: #0b1220;
+    /* Stack the history and current number vertically. */
+    display: flex;
+    flex-direction: column;
+    /* Put the text at the bottom-right of the screen. */
+    justify-content: flex-end;
+    align-items: flex-end;
+    /* Keep long content from spilling outside the rounded screen. */
+    overflow: hidden;
+}
+.history {
+    /* Reserve some space even when there is no calculation yet. */
+    min-height: 22px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+.display {
+    max-width: 100%;
+    color: white;
+    font-weight: 600;
+    text-align: right;
+    /* Use a smaller font on narrow screens, up to a maximum of 42px. */
+    font-size: clamp(28px, 8vw, 42px);
+    /* Prevent a very long number from overflowing horizontally. */
+    overflow-wrap: anywhere;
+}
+.keys {
+    /* Grid keeps the buttons in four equal-width columns. */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+button {
+    /* Make each button square, regardless of its column width. */
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 15px;
+    background: #334155;
+    color: #f8fafc;
+    font: inherit;
+    font-size: 23px;
+    /* Indicate that buttons can be clicked. */
+    cursor: pointer;
+    /* Make hover and pressed changes animate smoothly. */
+    transition: background 0.15s, transform 0.1s;
+}
+/* Give a visual response when the user hovers over a button. */
+button:hover {
+    background: #475569;
+}
+/* Slightly shrink the button while it is being pressed. */
+button:active {
+    transform: scale(0.95);
+}
+/* Show where keyboard focus is for accessibility. */
+button:focus-visible {
+    outline: 3px solid #f8fafc;
+    outline-offset: 2px;
+}
+/* The next three classes change appearance, NOT behavior.
+JavaScript uses data-action and data-operator to decide what to do. */
+.utility {
+    background: #475569;
+}
+.operator {
+    background: #d97706;
+}
+.operator:hover {
+    background: #f59e0b;
+}
+.equals {
+    background: #16a34a;
+}
+.equals:hover {
+    background: #22c55e;
+}
