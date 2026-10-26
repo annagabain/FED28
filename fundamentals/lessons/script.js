@@ -8,30 +8,33 @@ const mixed = [1, "two", true];
 console.log(colors[0]); // "red"
 console.log(colors.length); // 3
 
-colors.push("yellow");
+colors[colors.length] = "yellow";
 console.log(colors);
 
-colors.pop();
+colors.length = colors.length - 1;
 console.log(colors);
 
 for (let i = 0; i < colors.length; i++) {
   console.log(i, colors[i]);
 }
 
-for (const color of colors) {
-  console.log(color);
-}
-
 const colorsList = document.getElementById("colors-list");
-for (const color of colors) {
+for (let i = 0; i < colors.length; i++) {
   const li = document.createElement("li");
-  li.textContent = color;
-  li.style.color = color;
+  li.textContent = colors[i];
+  li.style.color = colors[i];
   colorsList.appendChild(li);
 }
 
 const mixedItem = document.createElement("li");
-mixedItem.textContent = "mixed: " + mixed.join(", ");
+let mixedText = "mixed: ";
+for (let i = 0; i < mixed.length; i++) {
+  if (i > 0) {
+    mixedText = mixedText + ", ";
+  }
+  mixedText = mixedText + mixed[i];
+}
+mixedItem.textContent = mixedText;
 colorsList.appendChild(mixedItem);
 
 // --- Objects ---
@@ -60,9 +63,9 @@ document.getElementById("person-info").textContent =
   person.name + ", age " + person.age + ", lives in " + person.city;
 
 const teamList = document.getElementById("team-list");
-for (const member of team) {
+for (let i = 0; i < team.length; i++) {
   const li = document.createElement("li");
-  li.textContent = member.name + " — " + member.role;
+  li.textContent = team[i].name + " — " + team[i].role;
   teamList.appendChild(li);
 }
 

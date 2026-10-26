@@ -14,21 +14,16 @@ const mixed = [1, "two", true];
 console.log(colors[0]); // "red"
 console.log(colors.length); // 3
 
-// Common ways to change an array
-colors.push("yellow"); // add at the end
+// Common ways to change an array (no array methods — use index and length)
+colors[colors.length] = "yellow"; // add at the end
 console.log(colors); // ["red", "green", "blue", "yellow"]
 
-colors.pop(); // remove the last item
+colors.length = colors.length - 1; // remove the last item
 console.log(colors); // ["red", "green", "blue"]
 
-// Loop over each item
+// Loop over each item with a classic for loop
 for (let i = 0; i < colors.length; i++) {
   console.log(i, colors[i]);
-}
-
-// for...of — same idea, no index needed
-for (const color of colors) {
-  console.log(color);
 }
 
 // --- while loops ---
