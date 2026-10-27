@@ -6,6 +6,30 @@
 const display = document.getElementById("display"); // The large number on screen
 const history = document.getElementById("history"); // The smaller calculation above it
 const keys = document.getElementById("keys"); // The container holding all buttons
+const themeToggle = document.getElementById("theme-toggle"); // Dark / light switch
+// ============================================================
+// THEME (dark / light)
+// ============================================================
+// CSS reads body[data-theme] and swaps color variables.
+// localStorage remembers the choice across page reloads.
+function applyTheme(theme) {
+    document.body.dataset.theme = theme;
+    themeToggle.textContent = theme === "dark" ? "Light" : "Dark";
+    themeToggle.setAttribute(
+        "aria-label",
+        theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+    );
+    localStorage.setItem("calculator-theme", theme);
+}
+
+const savedTheme = localStorage.getItem("calculator-theme");
+applyTheme(savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark");
+
+themeToggle.addEventListener("click", () => {
+    const next = document.body.dataset.theme === "dark" ? "light" : "dark";
+    applyTheme(next);
+});
+
 // ============================================================
 // 2. REMEMBER THE CALCULATOR'S CURRENT STATE
 // ============================================================

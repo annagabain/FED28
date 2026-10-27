@@ -5,6 +5,40 @@ Without it, adding padding could make our calculator wider than expected.
 * {
     box-sizing: border-box;
 }
+
+/*
+Theme palettes live on body[data-theme].
+JavaScript sets data-theme to "dark" or "light".
+color-scheme tells the browser how to style native UI (scrollbars, etc.).
+*/
+body[data-theme="dark"] {
+    color-scheme: dark;
+    --page-bg: #0f172a;
+    --calc-bg: #1e293b;
+    --screen-bg: #0b1220;
+    --text: #ffffff;
+    --muted: #94a3b8;
+    --btn: #334155;
+    --btn-hover: #475569;
+    --utility: #475569;
+    --shadow: rgba(0, 0, 0, 0.35);
+    --focus: #f8fafc;
+}
+
+body[data-theme="light"] {
+    color-scheme: light;
+    --page-bg: #e2e8f0;
+    --calc-bg: #ffffff;
+    --screen-bg: #f1f5f9;
+    --text: #0f172a;
+    --muted: #64748b;
+    --btn: #cbd5e1;
+    --btn-hover: #94a3b8;
+    --utility: #94a3b8;
+    --shadow: rgba(15, 23, 42, 0.12);
+    --focus: #0f172a;
+}
+
 body {
     /* Remove the browser's default margin around the page. */
     margin: 0;
@@ -13,25 +47,61 @@ body {
     /* Use CSS Grid to center the calculator horizontally and vertically. */
     display: grid;
     place-items: center;
-    background: #0f172a;
+    background: var(--page-bg);
+    color: var(--text);
     font-family: system-ui, -apple-system, sans-serif;
+    /* Smoothly fade colors when the theme changes. */
+    transition: background 0.2s, color 0.2s;
 }
+
+.theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    aspect-ratio: auto;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--calc-bg);
+    color: var(--text);
+    box-shadow: 0 4px 16px var(--shadow);
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.theme-toggle:hover {
+    background: var(--btn-hover);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
 .calculator {
     /* Take 92% of the available screen width, but never exceed 360px. */
     width: min(92vw, 360px);
     /* Space between the edge of the calculator and its contents. */
     padding: 22px;
     border-radius: 24px;
-    background: #1e293b;
+    background: var(--calc-bg);
     /* A soft shadow helps the calculator stand out from the page. */
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 20px 60px var(--shadow);
+    transition: background 0.2s, box-shadow 0.2s;
 }
+
 .screen {
     min-height: 115px;
     margin-bottom: 18px;
     padding: 15px;
     border-radius: 15px;
-    background: #0b1220;
+    background: var(--screen-bg);
     /* Stack the history and current number vertically. */
     display: flex;
     flex-direction: column;
@@ -40,16 +110,19 @@ body {
     align-items: flex-end;
     /* Keep long content from spilling outside the rounded screen. */
     overflow: hidden;
+    transition: background 0.2s;
 }
+
 .history {
     /* Reserve some space even when there is no calculation yet. */
     min-height: 22px;
-    color: #94a3b8;
+    color: var(--muted);
     font-size: 14px;
 }
+
 .display {
     max-width: 100%;
-    color: white;
+    color: var(--text);
     font-weight: 600;
     text-align: right;
     /* Use a smaller font on narrow screens, up to a maximum of 42px. */
@@ -57,19 +130,21 @@ body {
     /* Prevent a very long number from overflowing horizontally. */
     overflow-wrap: anywhere;
 }
+
 .keys {
     /* Grid keeps the buttons in four equal-width columns. */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
+
 button {
     /* Make each button square, regardless of its column width. */
     aspect-ratio: 1;
     border: 0;
     border-radius: 15px;
-    background: #334155;
-    color: #f8fafc;
+    background: var(--btn);
+    color: var(--text);
     font: inherit;
     font-size: 23px;
     /* Indicate that buttons can be clicked. */
@@ -77,33 +152,43 @@ button {
     /* Make hover and pressed changes animate smoothly. */
     transition: background 0.15s, transform 0.1s;
 }
+
 /* Give a visual response when the user hovers over a button. */
 button:hover {
-    background: #475569;
+    background: var(--btn-hover);
 }
+
 /* Slightly shrink the button while it is being pressed. */
 button:active {
     transform: scale(0.95);
 }
+
 /* Show where keyboard focus is for accessibility. */
 button:focus-visible {
-    outline: 3px solid #f8fafc;
+    outline: 3px solid var(--focus);
     outline-offset: 2px;
 }
+
 /* The next three classes change appearance, NOT behavior.
 JavaScript uses data-action and data-operator to decide what to do. */
 .utility {
-    background: #475569;
+    background: var(--utility);
 }
+
 .operator {
     background: #d97706;
+    color: #ffffff;
 }
+
 .operator:hover {
     background: #f59e0b;
 }
+
 .equals {
     background: #16a34a;
+    color: #ffffff;
 }
+
 .equals:hover {
     background: #22c55e;
 }
