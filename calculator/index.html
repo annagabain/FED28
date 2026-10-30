@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Tell the browser which character encoding we use, including symbols like ÷ and ×. -->
+  <meta charset="UTF-8">
+  <!-- Let the page scale correctly on phones and other small screens. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- The text shown in the browser tab. -->
+  <title>JavaScript Calculator</title>
+  <!-- Load our CSS from a separate file so styling stays out of the HTML. -->
+  <link rel="stylesheet" href="styles.css">
+  <!--
+  Load the JavaScript file.
+  defer waits until the HTML has been parsed before running the script.
+  This matters because JavaScript needs to find #display, #history, and #keys.
+  -->
+  <script src="script.js" defer></script>
+</head>
+<body data-theme="dark">
+<!-- Switches body[data-theme] between dark and light. -->
+<button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme">
+  Light
+</button>
+<!-- main identifies the calculator as the page's primary content. -->
+<main class="calculator" aria-label="Calculator">
+  <!-- The display area contains the expression and the current number. -->
+  <div class="screen">
+    <!--
+    JavaScript writes the previous calculation here.
+    id="history" is how getElementById("history") finds this element.
+    -->
+    <div class="history" id="history" aria-hidden="true"></div>
+    <!--
+    output is an HTML element for displaying a computed result.
+    JavaScript updates its textContent whenever the number changes.
+    -->
+    <output class="display" id="display" aria-label="Result">0</output>
+  </div>
+  <!--
+  Every calculator button goes inside #keys.
+  JavaScript attaches ONE click listener to this parent, rather than
+  attaching a separate listener to each button (event delegation).
+  -->
+  <div class="keys" id="keys">
+    <!--
+    data-action tells JavaScript to run a special function.
+    class="utility" is only for CSS styling.
+    type="button" prevents accidental form submission if the markup
+    is reused inside a form later.
+    -->
+    <button type="button" class="utility" data-action="clear">AC</button>
+    <button type="button" class="utility" data-action="sign" aria-label="Change sign">±</button>
+    <button type="button" class="utility" data-action="percent">%</button>
+    <button type="button" class="operator" data-operator="/" aria-label="Divide">÷</button>
+    <!--
+    data-digit tells JavaScript which digit was clicked.
+    The visual label and the stored digit are kept the same.
+    -->
+    <button type="button" data-digit="7">7</button>
+    <button type="button" data-digit="8">8</button>
+    <button type="button" data-digit="9">9</button>
+    <button type="button" class="operator" data-operator="*" aria-label="Multiply">×</button>
+    <button type="button" data-digit="4">4</button>
+    <button type="button" data-digit="5">5</button>
+    <button type="button" data-digit="6">6</button>
+    <button type="button" class="operator" data-operator="-" aria-label="Subtract">−</button>
+    <button type="button" data-digit="1">1</button>
+    <button type="button" data-digit="2">2</button>
+    <button type="button" data-digit="3">3</button>
+    <button type="button" class="operator" data-operator="+" aria-label="Add">+</button>
+    <button type="button" data-digit="0">0</button>
+    <button type="button" data-action="decimal">.</button>
+    <button type="button" class="utility" data-action="backspace" aria-label="Backspace">⌫</button>
+    <button type="button" class="equals" data-action="equals">=</button>
+  </div>
+</main>
+</body>
+</html>
